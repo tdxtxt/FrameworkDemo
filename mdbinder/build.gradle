@@ -1,0 +1,84 @@
+if (rootProject.ext.isModule) {
+    //可独立运行的app
+    apply plugin: 'com.android.application'
+} else {
+    //被依赖的library
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "0.0.1"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = [
+                    'src/main/java',
+                    'p_client/src/main/java',
+                    'p_service/src/main/java',
+            ]
+            assets.srcDirs = [
+                    'src/main/assets',
+                    'p_client/src/main/assets',
+                    'p_service/src/main/assets',
+            ]
+            res.srcDirs = [
+                    'src/main/res',
+                    'p_client/src/main/res',
+                    'p_service/src/main/res',
+            ]
+            aidl.srcDirs = [
+                    'src/main/aidl',
+                    'p_client/src/main/aidl',
+                    'p_service/src/main/aidl',
+            ]
+            jniLibs.srcDirs = [
+                    'src/main/jniLibs',
+                    'p_client/src/main/jniLibs',
+                    'p_service/src/main/jniLibs',
+            ]
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //google官方lib
+    implementation rootProject.ext.supprotLibs
+    //Arouter 配置
+    implementation project(':Routercore')
+    kapt rootProject.ext.arouterLibs["arouterCompiler"]
+}

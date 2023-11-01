@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+    defaultConfig {
+        applicationId "com.tdxtxt.framework"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+        ndk {
+//            abiFilters "armeabi-v7a"
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    signingConfigs {
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled true
+            keyAlias 'changanedu'
+            keyPassword 'changanedu'
+            storeFile file('changanedu.jks')
+            storePassword 'changanedu'
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            multiDexEnabled true
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            multiDexEnabled true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //依赖树查看命令  gradlew -q app:dependencies
+    configurations.all {
+//        all*.exclude group: 'android.support.v4', module: 'support-v4' //剔除supportv4
+//        all*.exclude group: 'android.support.v7', module: 'appcompat-v7'
+//        all*.exclude group: 'android.support.v4', module: 'core'
+//        all*.exclude group: 'android.support.v4', module: 'support-media-compat'
+//        all*.exclude group: 'com.squareup.okio'
+        resolutionStrategy {
+//            force 'com.squareup.okhttp3:okhttp:4.11.0'  //强制使用版本
+//            force 'com.squareup.okhttp3:logging-interceptor:4.11.0'  //强制使用版本
+//            force 'com.squareup.okio:okio-jvm:3.4.0'
+        }
+    }
+    //Arouter 配置
+    implementation project(':Routercore')
+    kapt rootProject.ext.arouterLibs["arouterCompiler"]
+
+    implementation project(':mdbinder')
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.tdxtxt.baselib.view.textview.RoundStyleTextView
+            android:id="@+id/btn_binder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bgColor="@color/bule_4379ff"
+            android:padding="12dp"
+            android:layout_margin="12dp"
+            app:radius="24dp"
+            android:text="Binder"
+            android:textColor="@color/white_ffffff"
+            android:textSize="16dp"
+            android:gravity="center"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>

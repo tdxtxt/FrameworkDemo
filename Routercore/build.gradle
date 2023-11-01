@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "0.0.1"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "HOST_DEV", rootProject.ext.host.HOST_DEV //常量-开发服务网地址
+            buildConfigField "String", "HOST_TEST", rootProject.ext.host.HOST_TEST //常量-测试服务网地址
+            buildConfigField "String", "HOST_RELEASE", rootProject.ext.host.HOST_RELEASE //常量-测试服务网地址
+        }
+
+        release {
+            buildConfigField "String", "HOST_DEV", rootProject.ext.host.HOST_DEV //常量-开发服务网地址
+            buildConfigField "String", "HOST_TEST", rootProject.ext.host.HOST_TEST //常量-测试服务网地址
+            buildConfigField "String", "HOST_RELEASE", rootProject.ext.host.HOST_RELEASE //常量-测试服务网地址
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //google官方lib
+    implementation rootProject.ext.supprotLibs
+    //Arouter
+    api rootProject.ext.arouterLibs["arouter"]
+
+    api rootProject.ext.fastDev
+    api rootProject.ext.netLibs
+}
