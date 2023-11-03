@@ -1,4 +1,3 @@
-https://github.com/tdxtxt/FrameworkDemo.git
 # 跨进程通信
 
 ### 一、使用AIDL通信，支持双向通讯
