@@ -8,14 +8,29 @@
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity
-            android:name="com.tdxtxt.mdbinder.client.ClientManangerActivity"
+            android:name="com.tdxtxt.mdbinder.client.AAClientActivity"
+            android:process=":client"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.tdxtxt.mdbinder.client.AidlRemoteServiceActivity"
             android:process=":client"
             android:screenOrientation="portrait" />
 
-        <service android:name="com.tdxtxt.mdbinder.service.RemoteService"
+        <activity android:name="com.tdxtxt.mdbinder.client.MessengerRemoteServiceActivity"
+            android:process=":client"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.tdxtxt.mdbinder.client.SocketRemoteServiceActivity"
+            android:process=":client"
+            android:screenOrientation="portrait" />
+
+
+
+        <service android:name="com.tdxtxt.mdbinder.service.AidlRemoteService"
             android:process=":service"
             android:exported="true"/>
         <service android:name="com.tdxtxt.mdbinder.service.MessengerRemoteService"
+            android:process=":service"
+            android:exported="true"/>
+        <service android:name="com.tdxtxt.mdbinder.service.SocketRemoteService"
             android:process=":service"
             android:exported="true"/>
     </application>

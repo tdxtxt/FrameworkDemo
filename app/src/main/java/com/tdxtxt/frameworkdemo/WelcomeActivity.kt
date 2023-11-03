@@ -5,7 +5,7 @@ import android.view.View
 import com.tdxtxt.baselib.ui.CommToolBarActivity
 import com.tdxtxt.baselib.ui.viewbinding.IViewBinding
 import com.tdxtxt.frameworkdemo.databinding.ActivityMdappWelcomeBinding
-import com.tdxtxt.mdbinder.client.ClientManangerActivity
+import com.tdxtxt.mdbinder.client.AAClientActivity
 
 /**
  * <pre>
@@ -24,7 +24,7 @@ class WelcomeActivity : CommToolBarActivity(), IViewBinding<ActivityMdappWelcome
         view?.setOnClickListener {
             when(it.id){
                 R.id.btn_binder -> {
-                    startActivity(Intent(this, ClientManangerActivity::class.java).apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK })
+                    startActivity(Intent(this, AAClientActivity::class.java).apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK })
                 }
             }
         }

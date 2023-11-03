@@ -16,7 +16,7 @@ import com.tdxtxt.mdbinder.repository.DBRepository
  *     desc   :
  * </pre>
  */
-class RemoteService: Service() {
+class AidlRemoteService: Service() {
     private var mClicentInterface: IAidlClientInterface? = null
     private val mServiceBinder by lazy {
         object : IAidlServiceInterface.Stub() {
